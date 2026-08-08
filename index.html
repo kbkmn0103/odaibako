@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="みんなのお題を投稿・閲覧できる公開お題箱">
-    <title>みんなのお題箱</title>
-    <link rel="stylesheet" href="style.css">
+
+```
+<meta
+    name="description"
+    content="みんなのお題を投稿・閲覧できる公開お題箱"
+>
+
+<title>みんなのお題箱</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
 </head>
 
 <body>
 
 <header class="header">
-    <div class="header-inner">
-        <a href="#" class="logo">📮 お題箱</a>
 
 ```
+<div class="header-inner">
+
+    <a href="#" class="logo">
+        📮 お題箱
+    </a>
+
     <nav class="nav">
         <a href="#post">お題を投稿</a>
         <a href="#topics">投稿一覧</a>
     </nav>
+
 </div>
 ```
 
@@ -28,10 +43,17 @@
 <main>
 
 ```
-<!-- ヒーロー -->
+<!-- =========================
+     ヒーロー
+========================== -->
+
 <section class="hero">
+
     <div class="hero-content">
-        <p class="hero-label">OPEN TOPIC BOX</p>
+
+        <p class="hero-label">
+            OPEN TOPIC BOX
+        </p>
 
         <h1>
             みんなのお題箱
@@ -46,38 +68,66 @@
             お題を投稿する
             <span>↓</span>
         </a>
+
     </div>
+
 </section>
 
 
-<!-- 投稿 -->
-<section class="post-section" id="post">
+<!-- =========================
+     投稿
+========================== -->
+
+<section
+    class="post-section"
+    id="post"
+>
 
     <div class="section-title">
+
         <span>01</span>
-        <h2>お題を投稿</h2>
+
+        <h2>
+            お題を投稿
+        </h2>
+
     </div>
+
 
     <div class="post-card">
 
         <p class="notice">
-            投稿した内容はみんなに公開されます
+            💡 投稿した内容はみんなに公開されます
         </p>
 
-        <label for="topicInput">お題</label>
+
+        <label for="topicInput">
+            お題
+        </label>
+
 
         <textarea
             id="topicInput"
             maxlength="200"
-            placeholder="ここにお題を入力"
+            placeholder="例：最近ハマっていることを教えて！"
         ></textarea>
 
-        <div class="input-bottom">
-            <span id="charCount">0 / 200</span>
 
-            <button id="postButton" class="post-button">
+        <div class="input-bottom">
+
+            <span id="charCount">
+                0 / 200
+            </span>
+
+
+            <button
+                type="button"
+                id="postButton"
+                class="post-button"
+            >
                 投稿する
             </button>
+
         </div>
 
     </div>
@@ -85,43 +135,81 @@
 </section>
 
 
-<!-- 投稿一覧 -->
-<section class="topics-section" id="topics">
+<!-- =========================
+     投稿一覧
+========================== -->
+
+<section
+    class="topics-section"
+    id="topics"
+>
 
     <div class="section-title">
+
         <span>02</span>
-        <h2>みんなのお題</h2>
+
+        <h2>
+            みんなのお題
+        </h2>
+
     </div>
 
 
     <div class="topic-tools">
 
         <div class="search-box">
-            <span>🔍</span>
+
+            <span>
+                🔍
+            </span>
+
             <input
                 type="text"
                 id="searchInput"
                 placeholder="お題を検索..."
             >
+
         </div>
 
+
         <select id="sortSelect">
-            <option value="new">新しい順</option>
-            <option value="old">古い順</option>
+
+            <option value="new">
+                新しい順
+            </option>
+
+            <option value="old">
+                古い順
+            </option>
+
         </select>
 
     </div>
 
 
-    <div id="topicList" class="topic-list">
-        <!-- JavaScriptで表示 -->
-    </div>
+    <div
+        id="topicList"
+        class="topic-list"
+    ></div>
 
 
-    <div id="emptyMessage" class="empty-message">
-        <div>📭</div>
-        <p>まだお題がありません</p>
-        <span>最初のお題を投稿してみよう！</span>
+    <div
+        id="emptyMessage"
+        class="empty-message"
+    >
+
+        <div>
+            📭
+        </div>
+
+        <p>
+            まだお題がありません
+        </p>
+
+        <span>
+            最初のお題を投稿してみよう！
+        </span>
+
     </div>
 
 </section>
@@ -129,19 +217,52 @@
 
 </main>
 
+<!-- =========================
+     フッター
+========================== -->
+
 <footer class="footer">
-    <p>📮 みんなのお題箱</p>
-    <p>Everyone can see the topics.</p>
+
+```
+<p>
+    📮 みんなのお題箱
+</p>
+
+<p>
+    Everyone can see the topics.
+</p>
+```
+
 </footer>
 
-<!-- 投稿完了メッセージ -->
+<!-- =========================
+     投稿完了通知
+========================== -->
 
-<div id="toast" class="toast">
-    <span>✓</span>
-    お題を投稿しました！
+<div
+    id="toast"
+    class="toast"
+>
+
+```
+<span>
+    ✓
+</span>
+
+お題を投稿しました！
+```
+
 </div>
 
-<script src="script.js"></script>
+<!-- =========================
+     JavaScript
+========================== -->
+
+<script
+    src="script.js"
+    defer
+></script>
 
 </body>
 </html>
+
