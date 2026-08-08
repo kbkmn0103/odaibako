@@ -1,49 +1,54 @@
-alert("JavaScriptが動いています！");
+// ========================================
+// みんなのお題箱
+// ========================================
 
-// ================================
-// お題箱 JavaScript
-// ================================
+console.log("お題箱 JavaScript 起動");
 
-console.log("script.js が読み込まれました");
+// ========================================
+// HTML要素
+// ========================================
 
-// -------------------------------
-// 初期データ
-// -------------------------------
+const topicInput = document.getElementById("topicInput");
+const charCount = document.getElementById("charCount");
+const postButton = document.getElementById("postButton");
 
-const defaultTopics = [
-{
-id: 3,
-text: "最近ハマっていることを教えて！",
-date: "2026/08/08 20:30"
-},
-{
-id: 2,
-text: "今一番行ってみたい場所は？",
-date: "2026/08/08 18:10"
-},
-{
-id: 1,
-text: "最近買ってよかったものは？",
-date: "2026/08/07 21:00"
-}
-];
+const topicList = document.getElementById("topicList");
+const emptyMessage = document.getElementById("emptyMessage");
 
-// -------------------------------
-// 保存データを取得
-// -------------------------------
+const searchInput = document.getElementById("searchInput");
+const sortSelect = document.getElementById("sortSelect");
 
-let topics;
+const toast = document.getElementById("toast");
+
+// ========================================
+// HTML要素の確認
+// ========================================
+
+console.log("topicInput =", topicInput);
+console.log("charCount =", charCount);
+console.log("postButton =", postButton);
+console.log("topicList =", topicList);
+
+// ========================================
+// データ
+// ========================================
+
+let topics = [];
+
+// ========================================
+// 保存されているデータを読み込む
+// ========================================
 
 try {
 
 ```
-const saved =
+const savedData =
     localStorage.getItem("odaibako_topics");
 
-if (saved) {
-    topics = JSON.parse(saved);
-} else {
-    topics = defaultTopics;
+if (savedData) {
+
+    topics = JSON.parse(savedData);
+
 }
 ```
 
@@ -51,290 +56,220 @@ if (saved) {
 
 ```
 console.error(
-    "保存データの読み込みに失敗しました",
+    "保存データの読み込みエラー:",
     error
 );
 
-topics = defaultTopics;
+topics = [];
 ```
 
 }
 
-// -------------------------------
-// HTML要素を取得
-// -------------------------------
-
-const topicInput =
-document.getElementById("topicInput");
-
-const postButton =
-document.getElementById("postButton");
-
-const charCount =
-document.getElementById("charCount");
-
-const topicList =
-document.getElementById("topicList");
-
-const emptyMessage =
-document.getElementById("emptyMessage");
-
-const searchInput =
-document.getElementById("searchInput");
-
-const sortSelect =
-document.getElementById("sortSelect");
-
-const toast =
-document.getElementById("toast");
-
-// -------------------------------
-// HTML要素が取得できたか確認
-// -------------------------------
-
-console.log("topicInput:", topicInput);
-console.log("postButton:", postButton);
-console.log("charCount:", charCount);
-
-// -------------------------------
+// ========================================
 // 文字数カウント
-// -------------------------------
+// ========================================
 
-if (topicInput) {
-
-```
 topicInput.addEventListener("input", function () {
 
-    const length = topicInput.value.length;
-
-    if (charCount) {
-        charCount.textContent =
-            `${length} / 200`;
-    }
-
-    // 空欄なら投稿ボタンを無効化
-    if (postButton) {
-
-        postButton.disabled =
-            topicInput.value.trim().length === 0;
-
-    }
-
-});
 ```
-
-}
-
-// -------------------------------
-// 投稿ボタン
-// -------------------------------
-
-if (postButton) {
-
-```
-postButton.addEventListener("click", function () {
-
-    console.log("投稿ボタンが押されました");
+const length =
+    topicInput.value.length;
 
 
-    // 入力内容
-    const text =
-        topicInput.value.trim();
+charCount.textContent =
+    length + " / 200";
 
 
-    // 空欄チェック
-    if (!text) {
+// 入力があれば投稿ボタンを有効化
 
-        alert("お題を入力してください。");
+if (length > 0) {
 
-        return;
+    postButton.disabled = false;
 
-    }
-
-
-    // 200文字制限
-    if (text.length > 200) {
-
-        alert("お題は200文字以内で入力してください。");
-
-        return;
-
-    }
-
-
-    // ---------------------------
-    // 日付
-    // ---------------------------
-
-    const now = new Date();
-
-    const year =
-        now.getFullYear();
-
-    const month =
-        String(now.getMonth() + 1)
-            .padStart(2, "0");
-
-    const day =
-        String(now.getDate())
-            .padStart(2, "0");
-
-    const hour =
-        String(now.getHours())
-            .padStart(2, "0");
-
-    const minute =
-        String(now.getMinutes())
-            .padStart(2, "0");
-
-
-    const date =
-        `${year}/${month}/${day} ${hour}:${minute}`;
-
-
-    // ---------------------------
-    // ID
-    // ---------------------------
-
-    let id = 1;
-
-    if (topics.length > 0) {
-
-        id =
-            Math.max(
-                ...topics.map(topic => topic.id)
-            ) + 1;
-
-    }
-
-
-    // ---------------------------
-    // 新しい投稿
-    // ---------------------------
-
-    const newTopic = {
-
-        id: id,
-
-        text: text,
-
-        date: date
-
-    };
-
-
-    // 先頭に追加
-
-    topics.unshift(newTopic);
-
-
-    // ---------------------------
-    // 保存
-    // ---------------------------
-
-    try {
-
-        localStorage.setItem(
-            "odaibako_topics",
-            JSON.stringify(topics)
-        );
-
-        console.log(
-            "投稿を保存しました",
-            newTopic
-        );
-
-    } catch (error) {
-
-        console.error(
-            "投稿の保存に失敗しました",
-            error
-        );
-
-    }
-
-
-    // ---------------------------
-    // 入力欄をリセット
-    // ---------------------------
-
-    topicInput.value = "";
-
-    if (charCount) {
-
-        charCount.textContent =
-            "0 / 200";
-
-    }
+} else {
 
     postButton.disabled = true;
 
-
-    // ---------------------------
-    // 一覧を更新
-    // ---------------------------
-
-    renderTopics();
-
-
-    // ---------------------------
-    // 完了メッセージ
-    // ---------------------------
-
-    showToast();
-
-
-    // ---------------------------
-    // 投稿一覧へ移動
-    // ---------------------------
-
-    setTimeout(function () {
-
-        const topicsSection =
-            document.getElementById("topics");
-
-        if (topicsSection) {
-
-            topicsSection.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
-
-    }, 300);
+}
+```
 
 });
+
+// ========================================
+// 投稿ボタン
+// ========================================
+
+postButton.addEventListener("click", function () {
+
 ```
+console.log("投稿ボタンが押されました");
+
+
+const text =
+    topicInput.value.trim();
+
+
+// 空欄
+
+if (text === "") {
+
+    alert("お題を入力してください。");
+
+    return;
 
 }
 
-// -------------------------------
+
+// ====================================
+// 現在時刻
+// ====================================
+
+const now = new Date();
+
+
+const year =
+    now.getFullYear();
+
+
+const month =
+    String(now.getMonth() + 1)
+        .padStart(2, "0");
+
+
+const day =
+    String(now.getDate())
+        .padStart(2, "0");
+
+
+const hour =
+    String(now.getHours())
+        .padStart(2, "0");
+
+
+const minute =
+    String(now.getMinutes())
+        .padStart(2, "0");
+
+
+const date =
+    `${year}/${month}/${day} ${hour}:${minute}`;
+
+
+// ====================================
+// ID
+// ====================================
+
+let id = 1;
+
+
+if (topics.length > 0) {
+
+    id =
+        Math.max(
+            ...topics.map(
+                topic => topic.id
+            )
+        ) + 1;
+
+}
+
+
+// ====================================
+// 新しい投稿
+// ====================================
+
+const newTopic = {
+
+    id: id,
+
+    text: text,
+
+    date: date
+
+};
+
+
+// 一番上に追加
+
+topics.unshift(newTopic);
+
+
+// ====================================
+// ブラウザに保存
+// ====================================
+
+try {
+
+    localStorage.setItem(
+        "odaibako_topics",
+        JSON.stringify(topics)
+    );
+
+} catch (error) {
+
+    console.error(
+        "保存エラー:",
+        error
+    );
+
+}
+
+
+// ====================================
+// 入力欄をリセット
+// ====================================
+
+topicInput.value = "";
+
+charCount.textContent =
+    "0 / 200";
+
+postButton.disabled = true;
+
+
+// ====================================
+// 一覧更新
+// ====================================
+
+renderTopics();
+
+
+// ====================================
+// 完了メッセージ
+// ====================================
+
+showToast();
+
+
+console.log(
+    "投稿完了:",
+    newTopic
+);
+```
+
+});
+
+// ========================================
 // お題一覧を表示
-// -------------------------------
+// ========================================
 
 function renderTopics() {
 
 ```
-if (!topicList) {
-    return;
-}
+// 一覧を空にする
+
+topicList.innerHTML = "";
 
 
-// 検索文字
-
-let keyword = "";
-
-if (searchInput) {
-
-    keyword =
-        searchInput.value
-            .trim()
-            .toLowerCase();
-
-}
-
-
+// ====================================
 // 検索
+// ====================================
+
+const keyword =
+    searchInput.value
+        .trim()
+        .toLowerCase();
+
 
 let filteredTopics =
     topics.filter(function (topic) {
@@ -346,100 +281,105 @@ let filteredTopics =
     });
 
 
-// ---------------------------
-// 並び替え
-// ---------------------------
+// ====================================
+// 並び順
+// ====================================
 
-if (sortSelect) {
+if (sortSelect.value === "new") {
 
-    if (sortSelect.value === "new") {
+    filteredTopics.sort(
+        function (a, b) {
 
-        filteredTopics.sort(
-            function (a, b) {
-                return b.id - a.id;
-            }
-        );
+            return b.id - a.id;
 
-    } else {
+        }
+    );
 
-        filteredTopics.sort(
-            function (a, b) {
-                return a.id - b.id;
-            }
-        );
+} else {
 
-    }
+    filteredTopics.sort(
+        function (a, b) {
+
+            return a.id - b.id;
+
+        }
+    );
 
 }
 
 
-// ---------------------------
-// 一覧を空にする
-// ---------------------------
-
-topicList.innerHTML = "";
-
-
-// ---------------------------
+// ====================================
 // 投稿がない場合
-// ---------------------------
+// ====================================
 
 if (filteredTopics.length === 0) {
 
-    if (emptyMessage) {
-        emptyMessage.style.display = "block";
-    }
+    emptyMessage.style.display =
+        "block";
 
     return;
 
 }
 
 
-if (emptyMessage) {
-    emptyMessage.style.display = "none";
-}
+emptyMessage.style.display =
+    "none";
 
 
-// ---------------------------
-// 投稿を生成
-// ---------------------------
+// ====================================
+// 投稿カードを作成
+// ====================================
 
 filteredTopics.forEach(function (topic) {
+
 
     const card =
         document.createElement("article");
 
-    card.className = "topic-card";
+    card.className =
+        "topic-card";
 
+
+    // 番号
 
     const number =
         document.createElement("div");
 
-    number.className = "topic-number";
+    number.className =
+        "topic-number";
 
     number.textContent =
-        `TOPIC #${String(topic.id).padStart(3, "0")}`;
+        "TOPIC #" +
+        String(topic.id)
+            .padStart(3, "0");
 
+
+    // お題
 
     const text =
         document.createElement("div");
 
-    text.className = "topic-text";
-
-    // textContentなので安全に表示される
+    text.className =
+        "topic-text";
 
     text.textContent =
         topic.text;
 
 
+    // 日付
+
     const date =
         document.createElement("div");
 
-    date.className = "topic-date";
+    date.className =
+        "topic-date";
 
     date.textContent =
-        `投稿日時：${topic.date}`;
+        "投稿日時：" +
+        topic.date;
 
+
+    // カードに追加
 
     card.appendChild(number);
 
@@ -448,6 +388,8 @@ filteredTopics.forEach(function (topic) {
     card.appendChild(date);
 
 
+    // 一覧に追加
+
     topicList.appendChild(card);
 
 });
@@ -455,48 +397,45 @@ filteredTopics.forEach(function (topic) {
 
 }
 
-// -------------------------------
+// ========================================
 // 検索
-// -------------------------------
+// ========================================
 
-if (searchInput) {
-
-```
 searchInput.addEventListener(
-    "input",
-    renderTopics
-);
+"input",
+function () {
+
 ```
+    renderTopics();
 
 }
+```
 
-// -------------------------------
+);
+
+// ========================================
 // 並び替え
-// -------------------------------
+// ========================================
 
-if (sortSelect) {
-
-```
 sortSelect.addEventListener(
-    "change",
-    renderTopics
-);
+"change",
+function () {
+
 ```
+    renderTopics();
 
 }
+```
 
-// -------------------------------
-// 完了通知
-// -------------------------------
+);
+
+// ========================================
+// 投稿完了通知
+// ========================================
 
 function showToast() {
 
 ```
-if (!toast) {
-    return;
-}
-
-
 toast.classList.add("show");
 
 
@@ -509,22 +448,14 @@ setTimeout(function () {
 
 }
 
-// -------------------------------
-// 初期状態
-// -------------------------------
+// ========================================
+// 最初の状態
+// ========================================
 
-if (postButton) {
-
-```
 postButton.disabled = true;
-```
-
-}
-
-// -------------------------------
-// 最初のお題を表示
-// -------------------------------
 
 renderTopics();
 
-console.log("お題箱のJavaScriptが正常に起動しました！");
+console.log(
+"お題箱 JavaScript 正常終了"
+);
