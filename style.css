@@ -1,0 +1,701 @@
+/* =========================
+基本設定
+========================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  }
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+"Noto Sans JP",
+sans-serif;
+
+```
+color: #202020;
+background: #f7f7f5;
+line-height: 1.7;
+```
+
+}
+
+a {
+color: inherit;
+text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+font: inherit;
+}
+
+/* =========================
+ヘッダー
+========================= */
+
+.header {
+position: sticky;
+top: 0;
+z-index: 100;
+
+```
+background: rgba(247, 247, 245, 0.92);
+backdrop-filter: blur(12px);
+
+border-bottom: 1px solid #e5e5e2;
+```
+
+}
+
+.header-inner {
+max-width: 1100px;
+margin: 0 auto;
+
+```
+height: 70px;
+
+padding: 0 24px;
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+```
+
+}
+
+.logo {
+font-size: 21px;
+font-weight: 800;
+letter-spacing: -0.5px;
+}
+
+.nav {
+display: flex;
+gap: 28px;
+
+```
+font-size: 14px;
+font-weight: 600;
+```
+
+}
+
+.nav a {
+transition: opacity 0.2s;
+}
+
+.nav a:hover {
+opacity: 0.55;
+}
+
+/* =========================
+ヒーロー
+========================= */
+
+.hero {
+min-height: 560px;
+
+```
+display: flex;
+align-items: center;
+justify-content: center;
+
+padding: 80px 24px;
+
+background:
+    radial-gradient(
+        circle at 20% 20%,
+        rgba(255, 210, 100, 0.35),
+        transparent 35%
+    ),
+    radial-gradient(
+        circle at 80% 70%,
+        rgba(120, 190, 255, 0.25),
+        transparent 35%
+    ),
+    #f7f7f5;
+```
+
+}
+
+.hero-content {
+max-width: 850px;
+text-align: center;
+}
+
+.hero-label {
+display: inline-block;
+
+```
+margin-bottom: 18px;
+
+font-size: 12px;
+font-weight: 800;
+letter-spacing: 3px;
+
+color: #777;
+```
+
+}
+
+.hero h1 {
+font-size: clamp(42px, 8vw, 86px);
+line-height: 1.1;
+letter-spacing: -4px;
+
+```
+margin-bottom: 28px;
+```
+
+}
+
+.hero-description {
+color: #666;
+
+```
+font-size: 17px;
+
+margin-bottom: 36px;
+```
+
+}
+
+.main-button {
+display: inline-flex;
+align-items: center;
+gap: 16px;
+
+```
+padding: 15px 25px;
+
+border-radius: 999px;
+
+background: #202020;
+color: white;
+
+font-weight: 700;
+
+transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+```
+
+}
+
+.main-button:hover {
+transform: translateY(-3px);
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+セクション共通
+========================= */
+
+.post-section,
+.topics-section {
+max-width: 900px;
+margin: 0 auto;
+
+```
+padding: 100px 24px;
+```
+
+}
+
+.section-title {
+display: flex;
+align-items: baseline;
+gap: 15px;
+
+```
+margin-bottom: 30px;
+```
+
+}
+
+.section-title span {
+font-size: 13px;
+font-weight: 800;
+color: #999;
+}
+
+.section-title h2 {
+font-size: 32px;
+letter-spacing: -1px;
+}
+
+/* =========================
+投稿フォーム
+========================= */
+
+.post-card {
+background: white;
+
+```
+padding: 35px;
+
+border: 1px solid #e5e5e2;
+
+border-radius: 18px;
+
+box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+```
+
+}
+
+.notice {
+padding: 12px 15px;
+
+```
+margin-bottom: 24px;
+
+border-radius: 10px;
+
+background: #f5f5f2;
+
+color: #666;
+
+font-size: 13px;
+```
+
+}
+
+.post-card label {
+display: block;
+
+```
+margin-bottom: 9px;
+
+font-size: 14px;
+font-weight: 700;
+```
+
+}
+
+textarea {
+width: 100%;
+min-height: 150px;
+
+```
+resize: vertical;
+
+padding: 16px;
+
+border: 1px solid #ddd;
+border-radius: 12px;
+
+outline: none;
+
+background: #fafafa;
+
+transition:
+    border 0.2s,
+    background 0.2s;
+```
+
+}
+
+textarea:focus {
+border-color: #777;
+background: white;
+}
+
+.input-bottom {
+display: flex;
+
+```
+justify-content: space-between;
+align-items: center;
+
+margin-top: 15px;
+```
+
+}
+
+#charCount {
+color: #999;
+font-size: 12px;
+}
+
+.post-button {
+border: none;
+
+```
+padding: 12px 24px;
+
+border-radius: 999px;
+
+background: #202020;
+color: white;
+
+font-weight: 700;
+
+cursor: pointer;
+
+transition:
+    transform 0.2s,
+    opacity 0.2s;
+```
+
+}
+
+.post-button:hover {
+transform: translateY(-2px);
+}
+
+.post-button:disabled {
+opacity: 0.4;
+cursor: not-allowed;
+}
+
+/* =========================
+検索・並び替え
+========================= */
+
+.topic-tools {
+display: flex;
+gap: 12px;
+
+```
+margin-bottom: 25px;
+```
+
+}
+
+.search-box {
+flex: 1;
+
+```
+display: flex;
+align-items: center;
+
+gap: 8px;
+
+padding: 0 15px;
+
+background: white;
+
+border: 1px solid #ddd;
+border-radius: 10px;
+```
+
+}
+
+.search-box input {
+width: 100%;
+
+```
+padding: 12px 0;
+
+border: none;
+
+outline: none;
+
+background: transparent;
+```
+
+}
+
+select {
+padding: 0 14px;
+
+```
+border: 1px solid #ddd;
+border-radius: 10px;
+
+background: white;
+
+outline: none;
+
+cursor: pointer;
+```
+
+}
+
+/* =========================
+お題一覧
+========================= */
+
+.topic-list {
+display: flex;
+flex-direction: column;
+
+```
+gap: 12px;
+```
+
+}
+
+.topic-card {
+background: white;
+
+```
+padding: 24px;
+
+border: 1px solid #e5e5e2;
+
+border-radius: 14px;
+
+transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+```
+
+}
+
+.topic-card:hover {
+transform: translateY(-2px);
+
+```
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+```
+
+}
+
+.topic-number {
+font-size: 11px;
+
+```
+color: #999;
+
+font-weight: 700;
+
+margin-bottom: 8px;
+```
+
+}
+
+.topic-text {
+font-size: 17px;
+font-weight: 600;
+
+```
+overflow-wrap: anywhere;
+```
+
+}
+
+.topic-date {
+margin-top: 12px;
+
+```
+color: #999;
+
+font-size: 11px;
+```
+
+}
+
+/* =========================
+空状態
+========================= */
+
+.empty-message {
+display: none;
+
+```
+text-align: center;
+
+padding: 70px 20px;
+
+color: #888;
+```
+
+}
+
+.empty-message div {
+font-size: 40px;
+
+```
+margin-bottom: 10px;
+```
+
+}
+
+.empty-message p {
+font-weight: 700;
+
+```
+color: #666;
+```
+
+}
+
+.empty-message span {
+font-size: 13px;
+}
+
+/* =========================
+通知
+========================= */
+
+.toast {
+position: fixed;
+
+```
+left: 50%;
+bottom: 30px;
+
+transform:
+    translate(-50%, 100px);
+
+opacity: 0;
+
+z-index: 200;
+
+padding: 13px 20px;
+
+background: #202020;
+color: white;
+
+border-radius: 999px;
+
+font-size: 14px;
+font-weight: 600;
+
+transition:
+    transform 0.3s,
+    opacity 0.3s;
+```
+
+}
+
+.toast.show {
+transform:
+translate(-50%, 0);
+
+```
+opacity: 1;
+```
+
+}
+
+/* =========================
+フッター
+========================= */
+
+.footer {
+padding: 50px 20px;
+
+```
+text-align: center;
+
+border-top: 1px solid #e5e5e2;
+
+color: #999;
+
+font-size: 12px;
+```
+
+}
+
+.footer p:first-child {
+color: #555;
+
+```
+font-weight: 700;
+
+margin-bottom: 5px;
+```
+
+}
+
+/* =========================
+スマートフォン
+========================= */
+
+@media (max-width: 600px) {
+
+```
+.header-inner {
+    height: 60px;
+
+    padding: 0 16px;
+}
+
+.logo {
+    font-size: 18px;
+}
+
+.nav {
+    gap: 15px;
+
+    font-size: 12px;
+}
+
+
+.hero {
+    min-height: 520px;
+
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+
+    letter-spacing: -2px;
+}
+
+.hero-description {
+    font-size: 14px;
+}
+
+
+.post-section,
+.topics-section {
+    padding: 70px 16px;
+}
+
+.section-title h2 {
+    font-size: 27px;
+}
+
+
+.post-card {
+    padding: 20px;
+
+    border-radius: 14px;
+}
+
+textarea {
+    min-height: 130px;
+}
+
+
+.topic-tools {
+    flex-direction: column;
+}
+
+select {
+    width: 100%;
+
+    height: 45px;
+}
+
+
+.topic-card {
+    padding: 20px;
+}
+
+.topic-text {
+    font-size: 15px;
+}
+
+
+.main-button {
+    padding: 13px 22px;
+}
+```
+
+}
